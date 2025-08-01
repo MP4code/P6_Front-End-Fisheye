@@ -1,7 +1,8 @@
+    document.addEventListener("DOMContentLoaded", getPhotographers);
     async function getPhotographers() {
         // Ceci est un exemple de données pour avoir un affichage de photographes de test dès le démarrage du projet, 
         // mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
-        let photographers = [
+       /* let photographers = [
             {
                 "name": "Ma data test",
                 "id": 1,
@@ -25,7 +26,19 @@
         return ({
             photographers: [...photographers, ...photographers, ...photographers]})
     }
+*/
 
+try {
+        const response = await fetch('data/photographers.json');
+        const data = await response.json();
+        console.log("Photographers:", data.photographers);
+        return { photographers: data.photographers };
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données des photographes :", error);
+        return { photographers: [] };
+    }
+}
+    
     async function displayData(photographers) {
         const photographersSection = document.querySelector(".photographer_section");
 
